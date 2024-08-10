@@ -75,7 +75,7 @@ opts.secretOrKey = process.env.JWT_SECRET_KEY; // TODO: should not be in code;
 
 //middlewares
 
-server.use(express.static(path.resolve(__dirname,'build')))
+// server.use(express.static(path.resolve(__dirname,'build')))
 server.use(cookieParser());
 server.use(
   session({
@@ -87,9 +87,14 @@ server.use(
 server.use(passport.authenticate('session'));
 server.use(
   cors({
+    origin: 'http://localhost:3000', // or ['http://example.com', 'http://anotherdomain.com']
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['X-Total-Count'],
+    credentials: true,
   })
 );
+
 server.use(express.json()); // to parse req.body
 
 server.use('/products', isAuth(), productsRouter.router);
@@ -102,9 +107,9 @@ server.use('/cart', isAuth(), cartRouter.router);
 server.use('/orders', isAuth(), ordersRouter.router);
 
 // this line we add to make react router work in case of other routes doesnt match
-server.get('*', (req, res) =>
-  res.sendFile(path.resolve('build', 'index.html'))
-);
+// server.get('*', (req, res) =>
+//   res.sendFile(path.resolve('build', 'index.html'))
+// );
 
 // Passport Strategies
 passport.use(
@@ -202,7 +207,9 @@ orderId
   });
 });
 
-
+server.get("/" ,(req, res) => {
+  res.send("Sever is started")
+})
 
 
 
