@@ -24,5 +24,5 @@ orderSchema.set('toJSON', {
     delete ret._id;
   },
 });
-
-exports.Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.model('Order', orderSchema);
+module.exports = Order 

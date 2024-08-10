@@ -26,5 +26,5 @@ productSchema.set('toJSON',{
     transform: function (doc,ret) { delete ret._id}
 })
 
-
-exports.Product = mongoose.model('Product',productSchema)
+const Product = mongoose.model('Product',productSchema)
+module.exports = Product

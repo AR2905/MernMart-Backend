@@ -1,4 +1,4 @@
-const { Category } = require('../model/Category_Model');
+const Category  = require('../model/Category_Model');
 
 // Log to check if the Category model is imported correctly
 console.log('Category Model:', Category);

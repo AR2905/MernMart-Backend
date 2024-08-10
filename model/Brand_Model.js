@@ -17,5 +17,5 @@ brandSchema.set('toJSON', {
     delete ret._id;
   },
 });
-
-exports.Brand = mongoose.model('Brand', brandSchema);
+const Brand = mongoose.model('Brand', brandSchema);
+module.exports = Brand

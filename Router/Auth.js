@@ -8,4 +8,6 @@ router.post('/signup', createUser)
 .post('/login', passport.authenticate('local'), loginUser)
 .get('/logout', logout)
 .get('/check',passport.authenticate('jwt'), checkAuth);
-exports.router = router;
+
+
+module.exports = router;

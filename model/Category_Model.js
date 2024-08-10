@@ -18,4 +18,6 @@ categorySchema.set('toJSON', {
   },
 });
 
-exports.Category = mongoose.model('Category', categorySchema);
+const Category = mongoose.model('Category', categorySchema);
+
+module.exports = Category

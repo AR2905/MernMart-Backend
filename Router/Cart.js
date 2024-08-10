@@ -8,5 +8,4 @@ router.post('/', addToCart)
       .delete('/:id', deleteFromCart)
       .patch('/:id', updateCart)
 
-
-exports.router = router;
+      module.exports = router;

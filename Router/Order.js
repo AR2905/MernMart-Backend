@@ -9,5 +9,4 @@ router.post('/', createOrder)
       .patch('/:id', updateOrder)
       .get('/',fetchAllOrders)
 
-
-exports.router = router;
+      module.exports = router;
