@@ -1,5 +1,5 @@
 const express = require('express');
-const { createOrder, fetchOrdersByUser, deleteOrder, updateOrder,fetchAllOrders } = require('../controller/Order_Ctrl');
+const { createOrder, fetchOrdersByUser, deleteOrder, updateOrder,fetchAllOrders } = require('../Controller/Order_Ctrl');
 
 const router = express.Router();
 //  /orders is already added in base path
