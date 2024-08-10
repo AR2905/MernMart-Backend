@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "index.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     },
     {
@@ -9,6 +10,13 @@
       "use": "@vercel/static"
     }
   ],
-
-  "rewrites": [{ "source": "/(.*)", "destination": "index.js" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "regions": [
+    "iad1", "sfo1" 
+  ]
 }
