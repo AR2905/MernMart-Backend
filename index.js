@@ -87,7 +87,7 @@ server.use(
 server.use(passport.authenticate('session'));
 server.use(
   cors({
-    origin: 'https://mern-mart.vercel.app/', // Replace with your Vercel project domain
+    origin: '*', // Replace with your Vercel project domain
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['X-Total-Count'],
