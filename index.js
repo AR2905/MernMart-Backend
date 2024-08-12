@@ -80,20 +80,31 @@ server.use(cookieParser());
 server.use(
   session({
     secret: process.env.SESSION_KEY,
-    resave: false, // don't save session if unmodified
-    saveUninitialized: false, // don't create session until something stored
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production', // Ensure cookies are sent over HTTPS in production
+      httpOnly: true, // Helps mitigate cross-site scripting (XSS) attacks
+      sameSite: 'None', // Necessary if front-end and back-end are on different domains
+    },
   })
 );
+
+// Ensure your server trusts the proxy, which is important for secure cookies:
+if (process.env.NODE_ENV === 'production') {
+  server.set('trust proxy', 1); // trust first proxy if behind a load balancer
+}
 server.use(passport.authenticate('session'));
 server.use(
   cors({
-    origin: '*', // Replace with your Vercel project domain
+    origin: 'https://mern-mart.vercel.app/', // Ensure this is the correct URL
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['X-Total-Count'],
-    credentials: true,
+    credentials: true, // Allows cookies to be sent with requests
   })
 );
+
 
 server.use(express.json()); // to parse req.body
 
@@ -147,15 +158,18 @@ passport.use(
 passport.use(
   'jwt',
   new JwtStrategy(opts, async function (jwt_payload, done) {
-    // console.log({ jwt_payload });
+    console.log('JWT Payload:', jwt_payload); // Debugging line
     try {
       const user = await User.findById(jwt_payload.id);
       if (user) {
-        return done(null, sanitizeUser(user)); // this calls serializer
+        console.log('User found:', user); // Debugging line
+        return done(null, sanitizeUser(user)); 
       } else {
+        console.log('User not found'); // Debugging line
         return done(null, false);
       }
     } catch (err) {
+      console.error('Error in JWT Strategy:', err); // Debugging line
       return done(err, false);
     }
   })
