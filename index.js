@@ -98,12 +98,13 @@ server.use(passport.authenticate('session'));
 server.use(
   cors({
     origin: 'https://mern-mart.vercel.app', // Ensure this URL is correct
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add other methods if needed
-    allowedHeaders: ['Content-Type', 'Authorization'], // Add other headers if needed
-    exposedHeaders: ['X-Total-Count'], // Expose any other headers if required
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['X-Total-Count'],
     credentials: true, // Allow cookies to be sent with requests
   })
 );
+
 
 
 
