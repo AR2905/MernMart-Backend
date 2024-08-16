@@ -97,13 +97,14 @@ if (process.env.NODE_ENV === 'production') {
 server.use(passport.authenticate('session'));
 server.use(
   cors({
-    origin: 'https://mern-mart.vercel.app/', // Ensure this is the correct URL
-    methods: 'GET,POST,PUT,DELETE',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['X-Total-Count'],
-    credentials: true, // Allows cookies to be sent with requests
+    origin: 'https://mern-mart.vercel.app', // Ensure this URL is correct
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add other methods if needed
+    allowedHeaders: ['Content-Type', 'Authorization'], // Add other headers if needed
+    exposedHeaders: ['X-Total-Count'], // Expose any other headers if required
+    credentials: true, // Allow cookies to be sent with requests
   })
 );
+
 
 
 server.use(express.json()); // to parse req.body
